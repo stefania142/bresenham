@@ -25,6 +25,11 @@ let ESCALA =20;
     bresenham(x0, y0, x1, y1, function(x,y) {
         plot(ctx, x, y, canvas.height);
     });
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+        dibujarCuadricula(ctx, canvas.width, canvas.heigth);
+        bresenham(x0, y0, x1, y1, function(x,y){
+            plot (ctx, x, y, canvas.height);
+        });
 }
 /**
  * dibuja un pixel en el canvas en la posición (x, y)
@@ -155,4 +160,24 @@ function generarTabla(pasos){
     }
     html += "</table>";
     contenedor.innerHTML = html;
+
+    function dibujarCuadricula (ctx, ancho, alto){
+        ctx.lineWidth =0.5;
+
+        //lineas verticales
+        for (let x=0; x <= ancho; x+= ESCALA){
+            ctx.beginPath();
+            ctx.moveTo(x,0);
+            ctx.lineTo(x,alto-20);
+            ctx.stroke();
+        }
+        //lineas horizontales
+        for(let y=0; y<= alto-20;y+=ESCALA){
+            ctx.beginPath();
+            ctx.moveTo(0,y);
+            ctx.lineTo(ancho,y);
+            ctx.stroke();
+        }
+    }
+
 }
