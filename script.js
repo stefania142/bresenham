@@ -18,6 +18,7 @@ let ESCALA =20;
 
     //limpiar el canvas antes de dibujar
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    dibujarCuadricula(ctx, canvas.width, canvas.height);
     //dibujar las marcas de la escala
     dibujarEscala(ctx, canvas.width, canvas.height);
 
@@ -25,11 +26,6 @@ let ESCALA =20;
     bresenham(x0, y0, x1, y1, function(x,y) {
         plot(ctx, x, y, canvas.height);
     });
-    ctx.clearRect(0,0,canvas.width, canvas.height);
-        dibujarCuadricula(ctx, canvas.width, canvas.heigth);
-        bresenham(x0, y0, x1, y1, function(x,y){
-            plot (ctx, x, y, canvas.height);
-        });
 }
 /**
  * dibuja un pixel en el canvas en la posición (x, y)
@@ -102,9 +98,7 @@ function bresenham (x0 , y0, x1, y1, plot){
             dx: dx, dy: dy,
             sx: sx, sy: sy,
             err: err, e2: e2
-
         })
-
         if(x0 === x1 && y0 === y1) 
             break;
 
@@ -160,24 +154,23 @@ function generarTabla(pasos){
     }
     html += "</table>";
     contenedor.innerHTML = html;
+}
+function dibujarCuadricula (ctx, ancho, alto){
+    ctx.strokeStyle="#dddddd";
+    ctx.lineWidth =0.5;
 
-    function dibujarCuadricula (ctx, ancho, alto){
-        ctx.lineWidth =0.5;
-
-        //lineas verticales
-        for (let x=0; x <= ancho; x+= ESCALA){
-            ctx.beginPath();
-            ctx.moveTo(x,0);
-            ctx.lineTo(x,alto-20);
-            ctx.stroke();
-        }
-        //lineas horizontales
-        for(let y=0; y<= alto-20;y+=ESCALA){
-            ctx.beginPath();
-            ctx.moveTo(0,y);
-            ctx.lineTo(ancho,y);
-            ctx.stroke();
-        }
+    //lineas verticales
+    for (let x=0; x <= ancho; x+= ESCALA){
+        ctx.beginPath();
+        ctx.moveTo(x,0);
+        ctx.lineTo(x,alto-20);
+        ctx.stroke();
     }
-
+    //lineas horizontales
+    for(let y=0; y<= alto-20;y+=ESCALA){
+        ctx.beginPath();
+        ctx.moveTo(0,y);
+        ctx.lineTo(ancho,y);
+        ctx.stroke();
+    }
 }
