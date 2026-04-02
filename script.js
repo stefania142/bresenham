@@ -174,3 +174,16 @@ function dibujarCuadricula (ctx, ancho, alto){
         ctx.stroke();
     }
 }
+/**
+ * con esta función limpiamos en canvas y la tabla de pasos
+ * borra todo el contenido ya dibujado en el canvas y pues tambuen vacía en contenedor
+ */
+function limpiar(){
+    let canvas = document.getElementById("miCanvas");
+    let ctx=canvas.getContext("2d");
+
+    //limpiamos el canvas completo
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //limpiamos la tabla 
+    document.getElementById("contenedorTabla").innerHTML="";
+}
